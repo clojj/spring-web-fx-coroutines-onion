@@ -2,7 +2,9 @@ package com.example.onion.application.registration
 
 import arrow.core.Either
 import arrow.core.Right
-import com.example.onion.domain.User
+import com.example.onion.domain.registration.ReadUserUseCase
+import com.example.onion.domain.registration.User
+import com.example.onion.domain.registration.readUser
 import com.example.onion.infrastructure.persistence.UserData
 import com.example.onion.infrastructure.persistence.UserRepository
 import com.example.onion.infrastructure.persistence.toDomain

@@ -1,9 +1,8 @@
-package com.example.onion.application.registration
+package com.example.onion.domain.registration
 
 import arrow.core.Either
 import arrow.core.computations.either
 import arrow.fx.coroutines.evalOn
-import com.example.onion.domain.User
 import kotlinx.coroutines.Dispatchers
 import java.util.*
 

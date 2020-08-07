@@ -1,6 +1,6 @@
 package com.example.onion.infrastructure.persistence
 
-import com.example.onion.domain.User
+import com.example.onion.domain.registration.User
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.data.repository.CrudRepository

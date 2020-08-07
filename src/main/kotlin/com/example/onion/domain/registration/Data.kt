@@ -1,4 +1,4 @@
-package com.example.onion.domain
+package com.example.onion.domain.registration
 
 import java.util.*
 
