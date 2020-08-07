@@ -1,4 +1,4 @@
-package com.example.onion.application
+package com.example.onion.application.registration
 
 import arrow.core.Either
 import arrow.core.computations.either
@@ -16,6 +16,7 @@ interface ReadUserUseCase {
 suspend fun <R> R.readUser(id: UUID): Either<Throwable, User>
         where R : ReadUserUseCase =
         either {
+            println("${System.currentTimeMillis()} readUser $id")
             val userFromDB = evalOn(Dispatchers.IO) { !readFromDB(id) }
             val user = evalOn(Dispatchers.Default) { !processUser(userFromDB) }
             user
