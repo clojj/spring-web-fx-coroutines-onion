@@ -7,9 +7,11 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
+// issue Structure101: won't show
 @Repository
-interface UserRepository : CrudRepository<UserData, String>
+interface UserRepository : CrudRepository<UserData, UUID>
 
+// issue Structure101: won't show
 @Table("users")
 data class UserData(
         @Id
@@ -18,4 +20,5 @@ data class UserData(
         val username: String
 )
 
+// issue Structure101: won't show
 fun UserData.toDomain() = User(this.id, this.email, this.username)
