@@ -4,20 +4,19 @@ import arrow.core.Either
 import arrow.core.computations.either
 import arrow.fx.coroutines.evalOn
 import kotlinx.coroutines.Dispatchers
+import reactor.core.publisher.Mono
 import java.util.*
 
-interface ReadUserUseCase {
-    suspend fun readFromDB(id: UUID): Either<Throwable, User>
-    suspend fun processUser(user: User): Either<Throwable, User>
+interface UpdateUsernameUseCase {
+    suspend fun updateUsername(id: UUID, name: String): Either<Throwable, Mono<User>>
+    suspend fun processUser(user: Mono<User>): Either<Throwable, Mono<User>>
+
+    suspend fun update(id: UUID, name: String): Either<Throwable, Mono<User>> =
+            either {
+                evalOn(Dispatchers.IO) {
+                    val userFromDB = !updateUsername(id, name)
+                    val user = !processUser(userFromDB)
+                    user
+                }
+            }
 }
-
-// issue Structure101: won't show
-suspend fun <R> R.readUser(id: UUID): Either<Throwable, User>
-        where R : ReadUserUseCase =
-        either {
-            println("${System.currentTimeMillis()} readUser $id")
-            val userFromDB = evalOn(Dispatchers.IO) { !readFromDB(id) }
-            val user = evalOn(Dispatchers.Default) { !processUser(userFromDB) }
-            user
-        }
-
